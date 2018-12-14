@@ -873,6 +873,9 @@ error_info(conflict) ->
     {409, <<"conflict">>, <<"Document update conflict.">>};
 error_info({conflict, _}) ->
     {409, <<"conflict">>, <<"Document update conflict.">>};
+error_info({partition_overflow, DocId}) ->
+    Descr = <<"'", DocId/binary, "' exceeds partition limit">>,
+    {403, <<"partition_overflow">>, Descr};
 error_info({{not_found, missing}, {_, _}}) ->
     {409, <<"not_found">>, <<"missing_rev">>};
 error_info({forbidden, Error, Msg}) ->
